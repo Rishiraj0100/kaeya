@@ -1,7 +1,7 @@
 import config, os
 
 from quart_discord import DiscordOAuth2Session, requires_authorization as auth
-from quart import Quart, redirect, url_for, render_template as render
+from quart import Quart, redirect, url_for, render_template as render, request
 
 
 app = Quart(__name__)
@@ -17,7 +17,7 @@ discord = DiscordOAuth2Session(app)
 
 @app.route("/")
 async def index():
-  return await render("index.html",logged=(await discord.authorized))
+  return await render("index.html",logged=(await discord.authorized),top_servers={})
 
 @app.route("/invite")
 async def invite():
@@ -25,7 +25,7 @@ async def invite():
 
 @app.route("/login")
 async def login():
-  red = requests.params.get("redirect","/me")
+  red = request.params.get("redirect","/me")
   return await discord.create_session(scope=["identify","guilds","guilds.join","connections","guilds.members.read"],data={"redirect": red})
 
 @app.route("/callback")
