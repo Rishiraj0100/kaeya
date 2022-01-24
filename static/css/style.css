@@ -1,0 +1,234 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+    color:white;
+    background: #202731;
+}
+
+section{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 20vw;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+h1{
+  font-size: 40px;
+}
+
+h2{
+    font-size: 40px;
+    text-shadow: 0px 0px 80px #3c31dd;
+}
+
+.home{
+    background: #3c31dd;
+    height: 510px;
+}
+
+
+.home img{
+    border-radius: 50%;
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 
+  100% { -moz-transform: rotate(360deg); } 
+}
+@-webkit-keyframes spin { 
+  100% { -webkit-transform: rotate(360deg); } 
+}
+@keyframes spin { 
+  100% { 
+      -webkit-transform: rotate(360deg); 
+      transform:rotate(360deg); 
+  } 
+}
+
+.btn  {
+    padding: 15px 100px;
+    margin:10px 4px;
+    color: #fff;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+    text-decoration: none;
+    display:inline-block;
+  }
+  .btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0%;
+    left: 0px;
+    width: 100%;
+    height: 1px;
+    background: #6098FF;
+    display: block;
+    -webkit-transform-origin: right top;
+    -ms-transform-origin: right top;
+    transform-origin: right top;
+    -webkit-transform: scale(0, 1);
+    -ms-transform: scale(0, 1);
+    transform: scale(0, 1);
+    -webkit-transition: transform 0.4s cubic-bezier(1, 0, 0, 1);
+    transition: transform 0.4s cubic-bezier(1, 0, 0, 1)
+  }
+  
+  .btn:hover::before {
+    -webkit-transform-origin: left top;
+    -ms-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    transform: scale(1, 1)
+  }
+
+.button a{
+    font-family: sans-serif;
+    color:white;
+    font-size: 20px;
+}
+.curve {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.curve svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 136px;
+}
+
+.curve .shape-fill {
+    fill: #202731;
+}
+
+.features{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 1000px;
+    padding: 100px 20vw;
+}
+
+.images{
+    display: flex;
+    flex-direction: row; 
+}
+
+.img1 {
+    height: 330px;
+    width: 375px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    border-radius: 25px;
+    background: #3c31dd;
+    margin: 30px;
+  }
+  
+  .img1:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+
+  .img1 img{
+      border-radius: 25px 25px 0 0;
+  }
+
+  .img1 p{
+    text-align: center;
+    font-family: sans-serif;
+  }
+  .custom-shape-divider-bottom-1641885598 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1641885598 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 84px;
+}
+
+.custom-shape-divider-bottom-1641885598 .shape-fill {
+    fill: #FA7268;
+}
+.ending{
+    background: #FA7268;
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+.img2 img{
+  border-radius: 50%;
+  margin: 30px;
+}
+
+.images {
+  scroll-behavior: auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.ending a{
+  font-family: sans-serif;
+  color: white;
+  text-decoration: none;
+}
