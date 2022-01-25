@@ -1,6 +1,6 @@
 import config, os
 
-from quart_discord import DiscordOAuth2Session, requires_authorization as auth, Unauthorised
+from quart_discord import DiscordOAuth2Session, requires_authorization as auth, Unauthorized
 from quart import Quart, redirect, url_for, render_template as render, request
 
 
@@ -80,7 +80,7 @@ async def logout():
   if await discord.authorized: discord.revoke()
   return redirect(url_for(".index"))
 
-@app.errorhandler(Unauthorised)
+@app.errorhandler(Unauthorized)
 async def unauth():
   return redirect("/login")
 
