@@ -1,6 +1,6 @@
 import config, os
 
-from quart_discord import DiscordOAuth2Session, requires_authorization as auth
+from quart_discord import DiscordOAuth2Session, requires_authorization as auth, Unauthorised
 from quart import Quart, redirect, url_for, render_template as render, request
 
 
@@ -25,7 +25,7 @@ async def invite():
 
 @app.route("/login")
 async def login():
-  red = request.params.get("redirect","/me")
+  red = request.args.get("redirect","/me")
   return await discord.create_session(scope=["identify","guilds","guilds.join","connections","guilds.members.read"],data={"redirect": red})
 
 @app.route("/callback")
@@ -79,5 +79,9 @@ async def user_guilds():
 async def logout():
   if await discord.authorized: discord.revoke()
   return redirect(url_for(".index"))
+
+@app.errorhandler(Unauthorised)
+async def unauth():
+  return redirect("/login")
 
 app.run("0.0.0.0",port=8080,debug=True)
