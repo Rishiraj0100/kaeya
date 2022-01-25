@@ -1,3 +1,4 @@
+import json
 from os import environ as env
 
 
@@ -41,6 +42,7 @@ async def connect():
   d=await Kaeya.all()
   for i in d:
     val = i.value
+    if i.key=="tops": val=json.loads(val)
     try: val=int(val)
     except: val=val
     globals()[i.key]=val
@@ -48,7 +50,7 @@ async def connect():
 async def update(k,v):
   from db import Kaeya
   mod = Kaeya.get_or_none(key=k)
-
+  if k=="tops" and isinstance(v,dict): v=json.dumps(v)
   try:
     if not await mod: return False
     await mod.update(value=str(v))
@@ -56,6 +58,8 @@ async def update(k,v):
 
   try: v=int(v)
   except: v=v
+
+  if k=="tops": v=json.loads(v)
 
   try: globals()[k]=v
   except: return False
