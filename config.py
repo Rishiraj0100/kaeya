@@ -1,6 +1,7 @@
 from os import environ as env
 
 
+app_secret = env.get("APP_KEY")
 id = 915274079274164234
 secret = env.get("SECRET")
 token = env.get("TOKEN")
