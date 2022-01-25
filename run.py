@@ -74,7 +74,8 @@ async def user_guilds():
     r=(f'<img src="{g.icon_url}">' if g.icon_url else "")+"<br />"
     if g.permissions.administrator: r+="[ADMIN] "
     r += g.name
-   return r
+    return r
+
   return "<br />".join([_(g) for g in guilds])
 
 @app.route("/logout/")
