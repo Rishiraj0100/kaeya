@@ -20,7 +20,7 @@ discord = DiscordOAuth2Session(app)
 async def index():
   return await render("index.html",logged=await discord.authorized,top_servers={})
 
-@app.route("/invite")
+@app.route("/invite/")
 async def invite():
   return redirect("https://discord.com/api/oauth2/authorize?client_id=915274079274164234&permissions=545394785527&scope=bot")
 
@@ -29,11 +29,13 @@ async def login():
   red = request.args.get("redirect","/me")
   return await discord.create_session(scope=["identify","guilds","guilds.join","connections","guilds.members.read"],data={"redirect": red})
 
-@app.route("/callback")
+@app.route("/callback/")
 async def callback():
+  if not requests.args.get("code"): return redirect("/")
+
   return redirect((await discord.callback()).get("redirect","/"))
 
-@app.route("/me")
+@app.route("/me/")
 @auth
 async def me():
   user = await discord.fetch_user()
@@ -82,6 +84,17 @@ async def user_guilds():
 async def logout():
   if await discord.authorized: discord.revoke()
   return redirect(url_for(".index"))
+
+@app.route("/join/")
+async def join():
+  if await discord.authorized:
+    await (await discord.fetch_user()).add_to_guild(config.support)
+    return redirect(request.args.get("redirect","/"))
+
+  return redirect("/discord")
+
+@app.route("/discord/")
+async def supp(): return redirect(config.supp)
 
 @app.errorhandler(Unauthorized)
 async def unauth(err):
