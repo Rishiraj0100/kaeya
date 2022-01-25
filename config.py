@@ -22,7 +22,7 @@ tortoise = {
   "apps": {
     "default": {
       "models": [
-        "models"
+        "db"
       ]
     }
   }
@@ -31,3 +31,32 @@ tortoise = {
 del expand_db_url
 
 tortoise["connections"]["default"]["credentials"]["ssl"] = "disable"
+
+
+async def connect():
+  from tortoise import Tortoise
+  await Tortoise.init(config = tortoise)
+  await Tortoise.generate_schemas(safe=True)
+  from db import Kaeya
+  d=await Kaeya.all()
+  for i in d:
+    val = i.value
+    try: val=int(val)
+    except: val=val
+    globals()[i.key]=val
+
+async def update(k,v):
+  from db import Kaeya
+  mod = Kaeya.get_or_none(key=k)
+
+  try:
+    if not await mod: return False
+    await mod.update(value=str(v))
+  except: return False
+
+  try: v=int(v)
+  except: v=v
+
+  try: globals()[k]=v
+  except: return False
+  return True
