@@ -1,0 +1,4 @@
+import asyncio,config
+asyncio.get_event_loop().run_until_complete(config.connect())
+import os
+os.system("python3 run.py")
