@@ -84,7 +84,7 @@ async def logout():
   return redirect(url_for(".index"))
 
 @app.errorhandler(Unauthorized)
-async def unauth():
+async def unauth(err):
   return redirect("/login")
 
 app.run("0.0.0.0",port=8080,debug=True)

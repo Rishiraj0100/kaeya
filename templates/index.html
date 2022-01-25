@@ -26,7 +26,7 @@
     <img src="https://images-ext-2.discordapp.net/external/zU0DGIleWz6VMbf5kcT7U2trcG12bg6LPj5ApQep8fg/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/915274079274164234/c24c8f8ca550ad4276a1802e3523d1a3">
     <h1>Kaeya - the discord bot</h1>
     <div class="button">
-      {% if logged %}
+      {% if not logged %}
       <a href="/login?redirect={{ request.path }}" class="btn">
         Login
       </a>
