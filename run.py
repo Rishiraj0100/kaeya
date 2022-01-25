@@ -1,7 +1,7 @@
 import config, os
 
 from quart_discord import DiscordOAuth2Session, requires_authorization as auth, Unauthorized
-from quart import Quart, redirect, url_for, render_template as render, request
+from quart import Quart, redirect, url_for, render_template as render, request, jsonify
 
 
 app = Quart(__name__)
@@ -99,5 +99,20 @@ async def supp(): return redirect(config.supp)
 @app.errorhandler(Unauthorized)
 async def unauth(err):
   return redirect("/login")
+
+@app.route("/api/dev/update", methods=["GET","POST"])
+async def api_dev_update():
+  if request.method.lower()=="get":
+    from db import Kaeya
+
+    ret = {"settings": {}}
+    for i in await Kaeya.all(): ret["settings"][i.key]=i.value
+  else:
+    ret=[]
+    for k,v in request.json.items(): ret.append(await config.update(k,v))
+    ret = {"success": all(ret)}
+
+  return jsonify(ret)
+
 
 app.run("0.0.0.0",port=8080,debug=True)
