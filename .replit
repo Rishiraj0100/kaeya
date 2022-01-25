@@ -1,2 +1,6 @@
 language = "python3"
 run = "bash run.sh"
+[packager]
+language = "python3"
+  [packager.features]
+  guessImports = false

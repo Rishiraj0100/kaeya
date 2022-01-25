@@ -18,7 +18,7 @@ discord = DiscordOAuth2Session(app)
 
 @app.route("/")
 async def index():
-  return await render("index.html",logged=await discord.authorized,top_servers={})
+  return await render("index.html",logged=await discord.authorized,top_servers=config.tops)
 
 @app.route("/invite/")
 async def invite():

@@ -34,18 +34,25 @@ del expand_db_url
 tortoise["connections"]["default"]["credentials"]["ssl"] = "disable"
 
 
-async def connect():
+async def c_onnect():
   from tortoise import Tortoise
   await Tortoise.init(config = tortoise)
   await Tortoise.generate_schemas(safe=True)
   from db import Kaeya
   d=await Kaeya.all()
+  a={}
   for i in d:
     val = i.value
     if i.key=="tops": val=json.loads(val)
     try: val=int(val)
     except: val=val
-    globals()[i.key]=val
+    a[i.key]=val
+  globals().update(a)
+
+def connect():
+  import asyncio
+  asyncio.get_event_loop() \
+  .run_until_complete(c_onnect())
 
 async def update(k,v):
   from db import Kaeya

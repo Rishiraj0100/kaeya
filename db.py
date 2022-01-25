@@ -2,7 +2,7 @@ from tortoise import fields, models
 
 
 class Kaeya(models.Model):
-  class meta:
+  class Meta:
     table = "bot_kaeya"
 
   key   = fields.TextField()
