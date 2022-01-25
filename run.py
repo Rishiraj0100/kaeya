@@ -8,6 +8,7 @@ app = Quart(__name__)
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "true"
 
+app.config["SECRET_KEY"] = config.app_secret
 app.config["DISCORD_CLIENT_ID"] = config.id
 app.config["DISCORD_CLIENT_SECRET"] = config.secret
 app.config["DISCORD_BOT_TOKEN"] = config.token
