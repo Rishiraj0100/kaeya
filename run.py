@@ -1,7 +1,7 @@
 import config, os
 
 from quart_discord import DiscordOAuth2Session, requires_authorization as auth, Unauthorized
-from quart import Quart, redirect, url_for, render_template as render, request, jsonify
+from quart import Quart, redirect, url_for, render_template as render, request, jsonify, abort
 
 
 app = Quart(__name__)
@@ -102,6 +102,9 @@ async def unauth(err):
 
 @app.route("/api/dev/update", methods=["GET","POST"])
 async def api_dev_update():
+  if request.headers.get("Authorization","&$")!=config.app_secret:
+    return abort(403) # 403: forbidden
+
   if request.method.lower()=="get":
     from db import Kaeya
 
