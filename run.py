@@ -18,7 +18,7 @@ discord = DiscordOAuth2Session(app)
 
 @app.route("/")
 async def index():
-  return await render("index.html",logged=(await discord.authorized),top_servers={})
+  return await render("index.html",logged=await discord.authorized,top_servers={})
 
 @app.route("/invite")
 async def invite():
@@ -52,7 +52,7 @@ async def me():
 
 @app.route("/me/connections/")
 @auth
-async def my_connections():
+async def connections():
   user = await discord.fetch_user()
   connections = await discord.fetch_connections()
   return f"""
@@ -74,6 +74,7 @@ async def user_guilds():
     r=(f'<img src="{g.icon_url}">' if g.icon_url else "")+"<br />"
     if g.permissions.administrator: r+="[ADMIN] "
     r += g.name
+   return r
   return "<br />".join([_(g) for g in guilds])
 
 @app.route("/logout/")
